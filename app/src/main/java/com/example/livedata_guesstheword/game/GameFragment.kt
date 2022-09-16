@@ -15,7 +15,7 @@ private const val ARG_PARAM2 = "param2"
 
 class GameFragment : Fragment() {
 
-
+private lateinit var binding: GameFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
