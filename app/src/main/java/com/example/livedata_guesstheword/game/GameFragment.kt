@@ -6,16 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.livedata_guesstheword.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.livedata_guesstheword.databinding.FragmentGameBinding
 
 
 class GameFragment : Fragment() {
 
-private lateinit var binding: GameFragmentBinding
+private lateinit var binding: FragmentGameBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
