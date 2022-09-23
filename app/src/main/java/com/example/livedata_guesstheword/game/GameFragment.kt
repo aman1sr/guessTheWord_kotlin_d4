@@ -32,6 +32,10 @@ private lateinit var viewModel: GameViewModel
             binding.wordText.text = newWord.toString()
         })
 
+        /* it variable is an implicit parameter in lambda.
+         if a function literal has only one parameter, its declaration may be omitted ,
+          and its name will be it:
+        */
         viewModel.score.observe(viewLifecycleOwner, Observer {
             binding.scoreText.text = it.toString()
         })

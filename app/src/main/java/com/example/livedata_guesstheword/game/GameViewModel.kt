@@ -7,9 +7,22 @@ import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
 
+    /* MutableLiveData is commonly used since it provides the postValue(), setValue() methods publicly,
+    * that LiveData class doesn’t provide
+    * It can be changed , & Inside the ViewModel, the data should be editable, so we uses MutableLiveData.
+    * */
+
+    /*                   LIVE-DATA
+* Data in a LiveData object can be read, but not changed. From outside the ViewModel,
+* data should be readable, but not editable, so the data should be exposed as LiveData.
+*/
+
+    //    To encapsulate our app's data, you use both MutableLiveData and LiveData objects
+
     private val _word = MutableLiveData<String>()
     val word: LiveData<String>
         get() = _word
+
 
     private val _score = MutableLiveData<Int>()
     val score: LiveData<Int>
@@ -23,6 +36,9 @@ class GameViewModel : ViewModel() {
         get() = _eventGameFinish
 
     private fun resetList() {
+        //  MutableList class is used to create mutable lists in which the elements can be added or removed.
+            //  https://www.geeksforgeeks.org/kotlin-mutablelistof/
+
         wordList = mutableListOf(
             "queen",
             "hospital",
@@ -34,6 +50,10 @@ class GameViewModel : ViewModel() {
             "calendar"
         )
         wordList.shuffle()
+        /*
+        * shuffle does shuffle into original list, shuffled do and return new list.
+            And same behavior is for sort & sorted, sortBy & sortedBy, reverse & asReversed:
+        * */
     }
 
     init {
@@ -51,7 +71,7 @@ class GameViewModel : ViewModel() {
     }
 
     fun onSkip() {
-        _score.value = (score.value)?.minus(1)
+        _score.value = (score.value)?.minus(1)      //
          nextWord()
     }
 
