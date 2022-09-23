@@ -11,12 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.livedata_guesstheword.R
 import com.example.livedata_guesstheword.databinding.FragmentGameBinding
-import com.example.livedata_guesstheword.databinding.GameFragmentBinding
 
 
 class GameFragment : Fragment() {
 
-private lateinit var binding: GameFragmentBinding
+private lateinit var binding: FragmentGameBinding
 private lateinit var viewModel: GameViewModel
 
 
@@ -25,7 +24,7 @@ private lateinit var viewModel: GameViewModel
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
 
         viewModel  = ViewModelProvider(this).get(GameViewModel::class.java)
 
