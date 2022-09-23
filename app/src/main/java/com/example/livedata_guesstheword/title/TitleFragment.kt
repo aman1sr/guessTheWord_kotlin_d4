@@ -24,8 +24,7 @@ class TitleFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_title, container, false)
 
         binding.playGameButton.setOnClickListener {
-            findNavController().navigate()
-
+            findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
         }
 
 
