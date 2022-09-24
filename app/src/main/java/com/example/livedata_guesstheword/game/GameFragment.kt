@@ -28,9 +28,9 @@ private lateinit var viewModel: GameViewModel
 
         viewModel  = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
-            binding.wordText.text = newWord.toString()
-        })
+//        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->          //  // No need since Now, we are directly using LiveData Obj in xml
+//            binding.wordText.text = newWord.toString()
+//        })
 
         /* it variable is an implicit parameter in lambda.
          if a function literal has only one parameter, its declaration may be omitted ,
@@ -40,17 +40,25 @@ private lateinit var viewModel: GameViewModel
             binding.scoreText.text = it.toString()
         })
 
-        viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                gameFinished()
-            }
-        })
+//        viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer {
+//            if (it) {
+//                gameFinished()
+//            }
+//        })
 
-        binding.correctButton.setOnClickListener { onCorrect() }
-        binding.skipButton.setOnClickListener { onSkip() }
-        binding.endGameButton.setOnClickListener { onEndGame() }
+                /* NO Need Now, since using DATA Binding */
+//        binding.correctButton.setOnClickListener { onCorrect() }
+//        binding.skipButton.setOnClickListener { onSkip() }
+//        binding.endGameButton.setOnClickListener { onEndGame() }
 
 
+        binding.gameViewModel = viewModel       //  passing the GameViewModel into the data binding , so now UI can directly control the Actions
+/*
+* Data binding creates a listener and sets the listener on the view.
+*   When the listened-for event happens, the listener evaluates the lambda expression
+* */
+
+        binding.lifecycleOwner = viewLifecycleOwner     // for binding word & score directly in  LiveData Object in xml directly
 
         return binding.root
     }
