@@ -30,7 +30,7 @@ private lateinit var viewModel: GameViewModel
 
         viewModel  = ViewModelProvider(this).get(GameViewModel::class.java)
 
-//        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->          //  // No need since Now, we are directly using LiveData Obj in xml
+//        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->          //  // No need since Now, we are directly using LiveData Obj in xml.
 //            binding.wordText.text = newWord.toString()
 //        })
 
