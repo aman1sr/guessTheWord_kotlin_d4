@@ -84,6 +84,12 @@ class GameViewModel : ViewModel() {
     init {
         Log.d("GameViewModel", "GameViewModel created!")
 
+        _word.value = ""
+        _score.value = 0
+
+        resetList()
+        nextWord()
+
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
             /*
             *  onTick() is a callback method,  is called on every tick.
@@ -97,12 +103,8 @@ class GameViewModel : ViewModel() {
                 onGameFinish()              // finish the Game once, countdown is finished
             }
         }
+        timer.start()
 
-        _word.value = ""
-        _score.value = 0
-
-        resetList()
-        nextWord()
     }
 
 

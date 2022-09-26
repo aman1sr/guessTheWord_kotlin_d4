@@ -7,3 +7,4 @@
 
 ## What's new
 > added timer to the Game Fragment
+> used Transformations.map() to convert one LiveData object to another.
