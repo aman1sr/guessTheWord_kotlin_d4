@@ -1,6 +1,7 @@
 package com.example.livedata_guesstheword.game
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +67,10 @@ private lateinit var viewModel: GameViewModel
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer<Boolean> {
             if (it)
                 gameFinished()
+        })
+
+        viewModel.currentTime.observe(viewLifecycleOwner, Observer {
+            Log.d("timer_d", "timer: "+it)
         })
 
         return binding.root

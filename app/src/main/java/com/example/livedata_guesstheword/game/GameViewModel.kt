@@ -1,8 +1,11 @@
 package com.example.livedata_guesstheword.game
 
+import android.os.CountDownTimer
+import android.text.format.DateUtils
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
@@ -31,9 +34,31 @@ class GameViewModel : ViewModel() {
     private lateinit var wordList: MutableList<String>
 
     private val _eventGameFinish = MutableLiveData<Boolean>()
-
     val eventGameFinish: LiveData<Boolean>
         get() = _eventGameFinish
+
+
+
+    private val _currentTime = MutableLiveData<Long>()      //  Mutable variable, to store countdown of the timer
+    val currentTime: LiveData<Long>
+    get() = _currentTime
+
+    private val timer: CountDownTimer       // initialzed in init block
+
+    companion object{
+        private const val DONE = 0L // game over time
+        private const val ONE_SECOND = 1000L    // countdown time interval
+        private const val COUNTDOWN_TIME = 60000L  // total time for the game
+    }
+/*
+* we use Transformations.map() to define currentTimeString.
+* Pass in the currentTime and a lambda function to format the time
+* */
+    val currentTimeString = Transformations.map(currentTime){ time ->
+        DateUtils.formatElapsedTime(time)
+
+    }
+
 
     private fun resetList() {
         //  MutableList class is used to create mutable lists in which the elements can be added or removed.
@@ -58,6 +83,21 @@ class GameViewModel : ViewModel() {
 
     init {
         Log.d("GameViewModel", "GameViewModel created!")
+
+        timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
+            /*
+            *  onTick() is a callback method,  is called on every tick.
+            * */
+            override fun onTick(p0: Long) {
+                _currentTime.value = p0/ ONE_SECOND
+            }
+
+            override fun onFinish() {
+                _currentTime.value = DONE
+                onGameFinish()              // finish the Game once, countdown is finished
+            }
+        }
+
         _word.value = ""
         _score.value = 0
 
@@ -65,8 +105,10 @@ class GameViewModel : ViewModel() {
         nextWord()
     }
 
+
     override fun onCleared() {
         super.onCleared()
+        timer.cancel()      // cancel the timer to avoid memory leaks
         Log.d("GameViewModel", "GameViewModel destroyed!")
     }
 
@@ -83,7 +125,8 @@ class GameViewModel : ViewModel() {
 
     private fun nextWord() {
         if (wordList.isEmpty()) {
-            onGameFinish()
+//            onGameFinish()
+            resetList()             // so Now the game Will be finished based on timer, not because the list gets Empty
         } else {
             _word.value = wordList.removeAt(0)
         }

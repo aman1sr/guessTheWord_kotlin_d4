@@ -5,3 +5,5 @@
  - else tick skip button 
  - the Score will update based on how well u played
 
+## What's new
+> added timer to the Game Fragment
