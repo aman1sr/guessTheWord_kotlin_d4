@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.livedata_guesstheword.R
 import com.example.livedata_guesstheword.databinding.FragmentGameBinding
 
@@ -78,6 +79,10 @@ private lateinit var viewModel: GameViewModel
 
     private fun gameFinished() {
         Toast.makeText(activity, "Game Finished", Toast.LENGTH_LONG).show()
+      val action = GameFragmentDirections.actionGameFragmentToScoreFragment()
+        action.score = viewModel.score.value?:0
+
+        findNavController(this).navigate(action)
         viewModel.onGameFinishComplete()
     }
 

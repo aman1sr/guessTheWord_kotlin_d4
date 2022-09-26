@@ -40,6 +40,13 @@
         <action
             android:id="@+id/action_scoreFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+
+        <argument
+            android:name="score"
+            android:defaultValue="0"
+            app:argType="integer"
+            />
+
     </fragment>
 
 </navigation>
