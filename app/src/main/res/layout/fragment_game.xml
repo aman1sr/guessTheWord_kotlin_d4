@@ -148,7 +148,7 @@ android:text="@{String.valueOf(gameViewModel.score)}"
             android:layout_marginEnd="16dp"
             android:text="@string/end_game"
 
-            android:onClick="@{() -> gameViewModel.onGameFinishComplete()}"
+            android:onClick="@{() -> gameViewModel.onGameFinish()}"
 
             android:theme="@style/SkipButton"
             app:layout_constraintBottom_toBottomOf="parent"

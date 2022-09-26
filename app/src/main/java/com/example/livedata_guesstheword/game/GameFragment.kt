@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.livedata_guesstheword.R
 import com.example.livedata_guesstheword.databinding.FragmentGameBinding
+import java.util.Objects
 
 
 class GameFragment : Fragment() {
@@ -61,6 +62,12 @@ private lateinit var viewModel: GameViewModel
 
         binding.lifecycleOwner = viewLifecycleOwner     // for binding word & score directly in  LiveData Object in xml directly
 
+
+        viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (it)
+                gameFinished()
+        })
+
         return binding.root
     }
 
@@ -82,7 +89,9 @@ private lateinit var viewModel: GameViewModel
       val action = GameFragmentDirections.actionGameFragmentToScoreFragment()
         action.score = viewModel.score.value?:0
 
-        findNavController(this).navigate(action)
+        findNavController().navigate(action)
+
+//        findNavController().navigate(GameFragmentDirections.actionGameFragmentToScoreFragment())
         viewModel.onGameFinishComplete()
     }
 

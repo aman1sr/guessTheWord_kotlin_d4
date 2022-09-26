@@ -89,13 +89,16 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    private fun onGameFinish() {
+    fun onGameFinishComplete() {
+        _eventGameFinish.value = false
+    }
+
+    // When the End button in Game Fragment is clicked , so Now The liveData in GameFragment can execute
+     fun onGameFinish() {
         _eventGameFinish.value = true
     }
 
-     fun onGameFinishComplete() {
-        _eventGameFinish.value = false
-    }
+
 
 
 }
